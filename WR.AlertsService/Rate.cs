@@ -12,7 +12,12 @@ namespace WR.AlertsService
     public class Rate
     {
         public string Currency { get; set; }
-        public decimal ConversionRate { get; set; }
+        public List<ConversionRate> ConversionRates { get; set; }
+    }
+
+    public class ConversionRate
+    {
+        public decimal Rate { get; set; }
         public DateTime ValidFrom { get; set; }
         public DateTime ValidTo { get; set; }
     }

@@ -10,5 +10,6 @@ namespace WR.AlertsService
         public DateTime ValidFrom { get; set; }
         public DateTime ValidTo { get; set; }
         public bool Triggered { get; set; }
+        public string PhoneNumber { get; set; }
     }
 }

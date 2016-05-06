@@ -13,14 +13,15 @@ namespace WR.AlertsService
             {
                 var rates = new List<Alert>
                 {
-                    new Alert()
+                    new Alert
                     {
                         FromCurrency = "GBP",
                         ToCurrency = "EUR",
                         RateThreshold = 1.2m,
                         ValidFrom = DateTime.Today,
                         ValidTo = DateTime.Today.AddDays(1),
-                        Triggered = false
+                        Triggered = false,
+                        PhoneNumber = "07594945553"
                     }
                 };
                 return Response.AsJson(rates);
@@ -30,14 +31,15 @@ namespace WR.AlertsService
             {
                 var rates = new List<Alert>
                 {
-                    new Alert()
+                    new Alert
                     {
                         FromCurrency = "GBP",
                         ToCurrency = "EUR",
                         RateThreshold = 1.2m,
                         ValidFrom = DateTime.Today,
                         ValidTo = DateTime.Today.AddDays(1),
-                        Triggered = false
+                        Triggered = false,
+                        PhoneNumber = "07594945553"
                     }
                 };
                 return Response.AsJson(rates);
