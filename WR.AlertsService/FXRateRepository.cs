@@ -43,13 +43,44 @@ namespace NotificationService
 
         public IEnumerable<FxRate> CreateHistoricalRates()
         {
-            //var historical = new List<Rate>();
-            //foreach (var rates in rateList)
-            //{
-            //    historical.Add(  );
-            //}
-            return null;
+            Dictionary<string, FxRate> historicalRates = new Dictionary<string, FxRate>(rateList);
+            foreach (var fxRate in historicalRates)
+            {
+                var toCcyRates = fxRate.Value.ExchangeRates;
+                foreach (var toCcy in toCcyRates)
+                {
+                    var existingRate = toCcy.ConversionRates.First();
+                    var dummyHistoricalPrices = GetHistoricalPrices(existingRate.ValidFrom.AddDays(-1), existingRate.Rate);
+                    toCcy.ConversionRates.AddRange(dummyHistoricalPrices);
+                }
+            }
+            return historicalRates.Values.ToList();
         }
+
+        private List<ConversionRate> GetHistoricalPrices(DateTime validFrom, decimal rate)
+        {
+            var result = new List<ConversionRate>();
+
+            var random = new Random(3);
+            for (int i = 0; i < 15; i++)
+            {
+                var difference = (decimal)(random.Next(1, 10) / 10.0);
+
+                var date = validFrom.AddDays(-i);
+                var newRate = rate - difference;
+                result.Add(new ConversionRate
+                {
+                    Rate = newRate,
+                    ValidFrom = date,
+                    ValidTo = date.AddDays(1)
+                });
+
+            }
+
+            return result;
+        }
+
+      
 
         private void ReadRatesFromFile()
         {
