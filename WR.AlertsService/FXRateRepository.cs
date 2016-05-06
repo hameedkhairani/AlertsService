@@ -37,7 +37,14 @@ namespace NotificationService
 
         public FlattenedRate GetCurrentRate(string fromCcy, string toCcy)
         {
-            throw new NotImplementedException();
+            var rate = rateList[fromCcy].ExchangeRates.Single(e => e.Currency == toCcy);
+            var flatternedRate = new FlattenedRate()
+            {
+                ToCurrency = toCcy,
+                FromCurrency = fromCcy,
+                ConversionRate  = rate.ConversionRates.Single().Rate
+            };
+            return flatternedRate;
         }
 
 
