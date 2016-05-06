@@ -64,7 +64,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Alert.cs" />
+    <Compile Include="AlertRepository.cs" />
     <Compile Include="AlertsModule.cs" />
+    <Compile Include="FlattenedRate.cs" />
     <Compile Include="FXRateRepository.cs" />
     <Compile Include="NancySelfHost.cs" />
     <Compile Include="Program.cs" />

@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using Nancy;
+using Nancy.ModelBinding;
 
 namespace WR.AlertsService
 {
@@ -25,6 +26,14 @@ namespace WR.AlertsService
                 };
                 return Response.AsJson(rates);
             };
+
+            Post["/v1/rate"] = parameters =>
+            {
+                var alert = this.Bind<FlattenedRate>();
+
+                return HttpStatusCode.OK;
+            };
+
         }
     }
 }
