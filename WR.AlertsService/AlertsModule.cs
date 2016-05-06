@@ -1,44 +1,29 @@
 using System;
 using System.Collections.Generic;
 using Nancy;
+using Nancy.ModelBinding;
 
 namespace WR.AlertsService
 {
     public class AlertsModule : NancyModule
     {
+        private readonly AlertRepository _alertRepository = new AlertRepository();
 
         public AlertsModule()
         {
+
             Get["/v1/alerts"] = parameters =>
             {
-                var rates = new List<Alert>
-                {
-                    new Alert
-                    {
-                        FromCurrency = "GBP",
-                        ToCurrency = "EUR",
-                        RateThreshold = 1.2m,
-                        Triggered = false,
-                        PhoneNumber = "07594945553"
-                    }
-                };
-                return Response.AsJson(rates);
+                var alerts = _alertRepository.GetAll();
+                return Response.AsJson(alerts);
             };
 
-            Put["/v1/alerts"] = parameters =>
+            Put["/v1/alert"] = parameters =>
             {
-                var rates = new List<Alert>
-                {
-                    new Alert
-                    {
-                        FromCurrency = "GBP",
-                        ToCurrency = "EUR",
-                        RateThreshold = 1.2m,
-                        Triggered = false,
-                        PhoneNumber = "07594945553"
-                    }
-                };
-                return Response.AsJson(rates);
+                var alert = this.Bind<Alert>();
+                _alertRepository.Add(alert);
+
+                return Response.AsJson(alert);
             };
 
         }

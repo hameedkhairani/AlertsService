@@ -8,7 +8,7 @@ namespace WR.AlertsService
 {
     public class AlertRepository: IAlertRepository
     {
-        private readonly List<Alert> _alerts = new List<Alert>();
+        private static readonly List<Alert> _alerts = new List<Alert>();
 
         public void Add(Alert alert)
         {
