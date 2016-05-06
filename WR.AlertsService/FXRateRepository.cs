@@ -30,9 +30,15 @@ namespace NotificationService
             return rateList.Values.ToList();
         }
 
-        public void UpdateRate(FlattenedRate rate)
+        public void UpdateRate(FlattenedRate requestedRate)
         {
-            throw new NotImplementedException();
+            var currentRate = rateList[requestedRate.FromCurrency]
+                                .ExchangeRates
+                                .Single(e => e.Currency == requestedRate.ToCurrency);
+
+            currentRate.ConversionRates
+                                .Single()
+                                .Rate = requestedRate.ConversionRate;
         }
 
         public FlattenedRate GetCurrentRate(string fromCcy, string toCcy)
