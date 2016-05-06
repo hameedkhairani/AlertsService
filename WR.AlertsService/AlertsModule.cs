@@ -18,8 +18,6 @@ namespace WR.AlertsService
                         FromCurrency = "GBP",
                         ToCurrency = "EUR",
                         RateThreshold = 1.2m,
-                        ValidFrom = DateTime.Today,
-                        ValidTo = DateTime.Today.AddDays(1),
                         Triggered = false,
                         PhoneNumber = "07594945553"
                     }
@@ -36,8 +34,6 @@ namespace WR.AlertsService
                         FromCurrency = "GBP",
                         ToCurrency = "EUR",
                         RateThreshold = 1.2m,
-                        ValidFrom = DateTime.Today,
-                        ValidTo = DateTime.Today.AddDays(1),
                         Triggered = false,
                         PhoneNumber = "07594945553"
                     }

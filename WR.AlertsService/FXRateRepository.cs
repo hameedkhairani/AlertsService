@@ -9,11 +9,10 @@ namespace NotificationService
 {
     public interface IFxRateRepository
     {
-        FxRate GetRate(string fromCurrency);
-        Rate GetRate(string fromCurrency, string toCurrency);
-
+        List<FxRate> GetRates();
+        void UpdateRate(FlattenedRate rate);
+        FlattenedRate GetCurrentRate(string fromCcy, string toCcy);
         IEnumerable<FxRate> CreateHistoricalRates();
-        Rate UpdateRateForNextMinute(Rate rate, decimal delta);
     }
 
     public class FxRateRepository : IFxRateRepository
@@ -26,15 +25,21 @@ namespace NotificationService
             ReadRatesFromFile();
         }
 
-        public FxRate GetRate(string fromCurrency)
+        public List<FxRate> GetRates()
         {
-            return rateList[fromCurrency];
+            return rateList.Values.ToList();
         }
 
-        public Rate GetRate(string fromCurrency, string toCurrency)
+        public void UpdateRate(FlattenedRate rate)
         {
-            return null;
+            throw new NotImplementedException();
         }
+
+        public FlattenedRate GetCurrentRate(string fromCcy, string toCcy)
+        {
+            throw new NotImplementedException();
+        }
+
 
         public IEnumerable<FxRate> CreateHistoricalRates()
         {
@@ -45,20 +50,6 @@ namespace NotificationService
             //}
             return null;
         }
-
-        public Rate UpdateRateForNextMinute(Rate rate, decimal delta)
-        {
-            return null;
-            //var key = rate.FromCurrency;
-
-            //var currentRate = rateList[key];
-            //currentRate.ValidFrom = DateTime.Now;
-            //currentRate.ValidTo = DateTime.Now.AddMinutes(1);
-            //currentRate.ExchangeRate += delta;
-
-            //return currentRate;
-        }
-
 
         private void ReadRatesFromFile()
         {
