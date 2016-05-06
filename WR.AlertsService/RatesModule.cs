@@ -12,18 +12,17 @@ namespace WR.AlertsService
 
             Get["/v1/rates"] = parameters =>
             {
-                var rates = new List<Rate>
+                var rate = new Rate()
                 {
-                    new Rate()
-                    {
-                        FromCurrency = "GBP",
-                        ToCurrency = "EUR",
-                        ExchangeRate = 1.5m,
-                        ValidFrom = DateTime.Today,
-                        ValidTo = DateTime.Today.AddDays(1)
-                    }
+                    Currency = "EUR",
+                    ConversionRate = 1.5m,
+                    ValidFrom = DateTime.Today,
+                    ValidTo = DateTime.Today.AddDays(1)
                 };
-                return Response.AsJson(rates);
+                var rates = new List<Rate> {rate};
+                var fxRate = new FxRate {Currency = "GBP", ExchangeRates = rates };
+                var fxRates = new List<FxRate> {fxRate};
+                return Response.AsJson(fxRates);
             };
         }
     }
