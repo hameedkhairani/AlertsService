@@ -9,7 +9,7 @@ namespace WR.AlertsService
 
         public void Start()
         {
-            _mNancyHost = new NancyHost(new Uri("http://localhost:5200"));
+            _mNancyHost = new NancyHost(new Uri("http://localhost:5000"));
             _mNancyHost.Start();
             Console.WriteLine("Service started...");
         }
